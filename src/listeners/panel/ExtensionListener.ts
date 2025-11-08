@@ -35,9 +35,7 @@ export class ExtensionListener extends BaseListener {
       case CommandToCode.openPreview:
         commands.executeCommand(COMMAND_NAME.preview);
         break;
-      case CommandToCode.openDashboard:
-        commands.executeCommand(COMMAND_NAME.dashboard);
-        break;
+
     }
   }
 

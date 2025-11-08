@@ -114,7 +114,7 @@ export class Dashboard {
       Dashboard.create();
     }
 
-    await commands.executeCommand('setContext', CONTEXT.isDashboardOpen, true);
+
   }
 
   /**
@@ -204,7 +204,7 @@ export class Dashboard {
         });
       }
 
-      await commands.executeCommand('setContext', CONTEXT.isDashboardOpen, this.webview?.visible);
+
     });
 
     Dashboard.webview.onDidDispose(async () => {
@@ -212,7 +212,7 @@ export class Dashboard {
       Dashboard._viewData = undefined;
       PanelMediaListener.getMediaSelection();
       DashboardSettings.updateAfterClose();
-      await commands.executeCommand('setContext', CONTEXT.isDashboardOpen, false);
+
     });
 
     SettingsHelper.attachListener('dashboard-listener', () => {

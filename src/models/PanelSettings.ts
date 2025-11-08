@@ -36,7 +36,6 @@ export interface PanelSettings {
 }
 
 export type PanelAction =
-  | 'openDashboard'
   | 'createContent'
   | 'optimizeSlug'
   | 'preview'
