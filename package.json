@@ -2,10 +2,10 @@
   "name": "hugo-cms",
   "displayName": "Hugo CMS",
   "description": "A lightweight VS Code extension for managing Hugo static site projects. Simplify content creation, front matter editing, and site management directly within your editor. Built for Hugo developers who want a focused CMS experience.",
-  "icon": "assets/frontmatter-teal-128x128.png",
+  "icon": "assets/hg-logo-128x128.png",
   "version": "10.9.0",
   "preview": false,
-  "publisher": "jimmmysong",
+  "publisher": "jimmysong",
   "galleryBanner": {
     "color": "#0e131f",
     "theme": "dark"
@@ -100,8 +100,8 @@
       "activitybar": [
         {
           "id": "frontmatter-explorer",
-          "title": "FM",
-          "icon": "$(fm-logo)"
+          "title": "HUGO",
+          "icon": "assets/hg-logo.svg"
         }
       ]
     },
@@ -110,7 +110,7 @@
         {
           "id": "frontMatter.explorer",
           "name": "Front Matter",
-          "icon": "$(fm-logo)",
+          "icon": "assets/hg-logo.svg",
           "type": "webview"
         }
       ]

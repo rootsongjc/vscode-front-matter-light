@@ -1,7 +1,7 @@
 export const EXTENSION_COMMAND_PREFIX = 'frontMatter';
 
-export const EXTENSION_ID = 'jimmmysong.hugo-cms';
-export const EXTENSION_BETA_ID = 'jimmmysong.hugo-cms-beta';
+export const EXTENSION_ID = 'jimmysong.hugo-cms';
+export const EXTENSION_BETA_ID = 'jimmysong.hugo-cms-beta';
 
 export const getCommandName = (command: string) => {
   return `${EXTENSION_COMMAND_PREFIX}.${command}`;
