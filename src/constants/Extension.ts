@@ -1,7 +1,7 @@
 export const EXTENSION_COMMAND_PREFIX = 'frontMatter';
 
-export const EXTENSION_ID = 'eliostruyf.vscode-front-matter';
-export const EXTENSION_BETA_ID = 'eliostruyf.vscode-front-matter-beta';
+export const EXTENSION_ID = 'eliostruyf.hugo-cms';
+export const EXTENSION_BETA_ID = 'eliostruyf.hugo-cms-beta';
 
 export const getCommandName = (command: string) => {
   return `${EXTENSION_COMMAND_PREFIX}.${command}`;

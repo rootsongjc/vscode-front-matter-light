@@ -22,7 +22,22 @@ npm run prettier
 npm run test-compile
 ```
 
-For debugging: run `npm run dev:ext`, then press F5 in VS Code to start a debug session.
+### Debugging & Running Locally
+
+**Method 1: Direct Run with Dev Build**
+1. Run `npm run dev:ext` (compiles all components in watch mode)
+2. Press F5 in VS Code to start debug session
+3. Opens new VS Code window with extension loaded
+
+**Method 2: Package as VSIX (Recommended for Testing)**
+```bash
+# After npm install and npm run build:ext
+npx vsce package
+# Generates: vscode-front-matter-beta-10.9.0.vsix
+
+# Install in VS Code Insiders:
+# Extensions sidebar → "Install from VSIX" → select the .vsix file
+```
 
 ## Architecture & Codebase Structure
 

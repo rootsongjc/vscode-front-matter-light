@@ -83,13 +83,15 @@ export async function activate(context: vscode.ExtensionContext) {
 
   // Start listening to the folders for content changes.
   // This will make sure the dashboard is up to date
-  PagesListener.startWatchers();
+  // DISABLED: Not scanning registered folders
+  // PagesListener.startWatchers();
 
   collection = vscode.languages.createDiagnosticCollection('frontMatter');
 
   // Pages dashboard
-  Dashboard.init();
-  Dashboard.registerCommands();
+  // DISABLED: Dashboard functionality not needed
+  // Dashboard.init();
+  // Dashboard.registerCommands();
 
   // Multilingual commands
   i18n.register();
@@ -98,9 +100,10 @@ export async function activate(context: vscode.ExtensionContext) {
   Settings.registerCommands();
   SettingsHelper.registerCommands();
 
-  if (!extension.getVersion().usedVersion) {
-    vscode.commands.executeCommand(COMMAND_NAME.dashboard);
-  }
+  // DISABLED: Don't open dashboard on first install
+  // if (!extension.getVersion().usedVersion) {
+  //   vscode.commands.executeCommand(COMMAND_NAME.dashboard);
+  // }
 
   // Register the explorer view
   const explorerSidebar = PanelProvider.getInstance(extensionUri);
@@ -149,7 +152,8 @@ export async function activate(context: vscode.ExtensionContext) {
     vscode.StatusBarAlignment.Right,
     -100
   );
-  fmStatusBarItem.command = COMMAND_NAME.dashboard;
+  // DISABLED: Don't link status bar to dashboard
+  // fmStatusBarItem.command = COMMAND_NAME.dashboard;
   fmStatusBarItem.text = `$(fm-logo) ${extension.getVersion().installedVersion}`;
   fmStatusBarItem.tooltip = EXTENSION_NAME;
   fmStatusBarItem.show();
@@ -182,7 +186,8 @@ export async function activate(context: vscode.ExtensionContext) {
   triggerPageUpdate(`main`);
 
   // Listener for file saves
-  subscriptions.push(PagesListener.saveFileWatcher());
+  // DISABLED: Not tracking file changes
+  // subscriptions.push(PagesListener.saveFileWatcher());
 
   // Webview for preview
   Preview.init();
@@ -226,8 +231,9 @@ export async function activate(context: vscode.ExtensionContext) {
   GitListener.init();
 
   // Once everything is registered, the page parsing can start in the background
-  DashboardSettings.get();
-  PagesParser.start();
+  // DISABLED: Background content parsing not needed
+  // DashboardSettings.get();
+  // PagesParser.start();
 
   // Cache commands
   Cache.registerCommands();

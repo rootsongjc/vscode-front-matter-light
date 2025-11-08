@@ -26,27 +26,12 @@ const Actions: React.FunctionComponent<IActionsProps> = ({
   const contentType = useContentType(settings, metadata);
   const disableActions = settings.disabledActions || [];
 
-  const openDashboard = () => {
-    messageHandler.send(CommandToCode.openDashboard);
-  };
-
   const createContent = () => {
     messageHandler.send(CommandToCode.createContent);
   };
 
   const actions = React.useMemo(() => {
     const allActions: JSX.Element[] = [];
-
-    if (!disableActions.includes(`openDashboard`)) {
-      allActions.push(
-        <button
-          title={l10n.t(LocalizationKey.panelBaseViewActionOpenDashboard)}
-          onClick={openDashboard}
-          type={`button`}>
-          {l10n.t(LocalizationKey.panelBaseViewActionOpenDashboard)}
-        </button>
-      );
-    }
 
     if (metadata?.title && !disableActions.includes(`optimizeSlug`)) {
       allActions.push(<SlugAction key="optimizeSlug" />);

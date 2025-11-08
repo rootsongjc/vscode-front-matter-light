@@ -1,7 +1,7 @@
 {
-  "name": "vscode-front-matter-beta",
-  "displayName": "Front Matter CMS",
-  "description": "Front Matter is a CMS that runs within Visual Studio Code. It gives you the power and control of a full-blown CMS while also providing you the flexibility and speed of the static site generator of your choice like: Hugo, Jekyll, Docusaurus, NextJs, Gatsby, and many more...",
+  "name": "hugo-cms",
+  "displayName": "Hugo CMS",
+  "description": "A lightweight VS Code extension for managing Hugo static site projects. Simplify content creation, front matter editing, and site management directly within your editor. Built for Hugo developers who want a focused CMS experience.",
   "icon": "assets/frontmatter-teal-128x128.png",
   "version": "10.9.0",
   "preview": false,
@@ -31,14 +31,15 @@
   },
   "l10n": "./l10n",
   "categories": [
-    "AI",
-    "Visualization"
+    "Other"
   ],
   "keywords": [
-    "Front Matter",
+    "Hugo",
     "CMS",
+    "Static Site Generator",
     "Markdown",
-    "Taxonomy"
+    "Front Matter",
+    "Content Management"
   ],
   "license": "MIT",
   "author": "Elio Struyf <elio@struyfconsulting.be> (https://www.eliostruyf.com)",
