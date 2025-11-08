@@ -61,7 +61,18 @@ export class Extension {
   } {
     const frontMatter = extensions.getExtension(
       this.isBetaVersion() ? EXTENSION_BETA_ID : EXTENSION_ID
-    )!;
+    );
+    
+    if (!frontMatter) {
+      // Handle the case where the extension is not found
+      const installedVersion = 'unknown';
+      const usedVersion = this.ctx.globalState.get<string>(ExtensionState.Version);
+      return {
+        usedVersion,
+        installedVersion
+      };
+    }
+    
     let installedVersion = frontMatter.packageJSON.version;
     const usedVersion = this.ctx.globalState.get<string>(ExtensionState.Version);
 
@@ -122,21 +133,21 @@ export class Extension {
    * Get the title of the extension
    */
   public get title(): string {
-    return this.ctx.extension.packageJSON.name;
+    return this.ctx.extension?.packageJSON?.name || 'Front Matter';
   }
 
   /**
    * Get the displayName of the extension
    */
   public get displayName(): string {
-    return this.ctx.extension.packageJSON.displayName;
+    return this.ctx.extension?.packageJSON?.displayName || 'Front Matter CMS';
   }
 
   /**
    * Returns the extension's version
    */
   public get version(): string {
-    return this.ctx.extension.packageJSON.version;
+    return this.ctx.extension?.packageJSON?.version || 'unknown';
   }
 
   /**
@@ -397,7 +408,10 @@ export class Extension {
   public get packageJson() {
     const frontMatter = extensions.getExtension(
       this.isBetaVersion() ? EXTENSION_BETA_ID : EXTENSION_ID
-    )!;
+    );
+    if (!frontMatter) {
+      return {};
+    }
     return frontMatter.packageJSON;
   }
 
