@@ -1,10 +1,8 @@
 import { i18n } from '../../commands';
 import { ExtensionState } from '../../constants';
-import { Page } from '../../dashboardWebView/models';
-import { Extension } from '../../helpers';
+import { Extension, PagesListener, Page } from '../../helpers';
 import { PostMessageData } from '../../models';
 import { CommandToCode } from '../../panelWebView/CommandToCode';
-import { PagesListener } from '../dashboard/PagesListener';
 import { BaseListener } from './BaseListener';
 import Fuse from 'fuse.js';
 

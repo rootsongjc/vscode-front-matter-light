@@ -3,7 +3,6 @@ import { STATIC_FOLDER_PLACEHOLDER } from './../constants/StaticFolderPlaceholde
 import { parseWinPath } from './../helpers/parseWinPath';
 import { dirname, extname, join } from 'path';
 import { StatusBarAlignment, Uri, window } from 'vscode';
-import { Dashboard } from '../commands/Dashboard';
 import { Folders } from '../commands/Folders';
 import {
   DefaultFields,
@@ -11,17 +10,18 @@ import {
   ExtensionState,
   SETTING_DATE_FORMAT
 } from '../constants';
-import { Page } from '../dashboardWebView/models';
 import {
-  ArticleHelper,
-  ContentType,
-  DateHelper,
-  Extension,
-  FilesHelper,
-  isValidFile,
-  Logger,
-  Notifications,
-  Settings
+ArticleHelper,
+ContentType,
+DateHelper,
+Extension,
+FilesHelper,
+isValidFile,
+Logger,
+Notifications,
+Settings,
+Page,
+  Dashboard
 } from '../helpers';
 import { existsAsync, getDescriptionField, getTitleField } from '../utils';
 import { Article, Cache } from '../commands';

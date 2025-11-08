@@ -5,8 +5,7 @@ import {
   SETTING_WEBSITE_URL
 } from './../constants/settings';
 import { workspace } from 'vscode';
-import { ContentType, Extension, Logger, Settings, TaxonomyHelper } from '.';
-import { Dashboard } from '../commands/Dashboard';
+import { ContentType, Extension, Logger, Settings, TaxonomyHelper, Dashboard } from '.';
 import { Preview } from '../commands/Preview';
 import { Project } from '../commands/Project';
 import {

@@ -13,15 +13,17 @@ import {
   SETTING_GIT_SUBMODULE_PUSH
 } from './../../constants';
 import { Settings } from './../../helpers/SettingsHelper';
-import { Dashboard } from '../../commands/Dashboard';
 import { PanelProvider } from '../../panelWebView/PanelProvider';
 import {
-  ArticleHelper,
-  Extension,
-  Logger,
-  Notifications,
-  parseWinPath,
-  processTimePlaceholders
+ArticleHelper,
+Extension,
+Logger,
+Notifications,
+parseWinPath,
+processTimePlaceholders,
+  Dashboard,
+  DashboardCommand,
+  DashboardMessage
 } from '../../helpers';
 import { GeneralCommands } from './../../constants/GeneralCommands';
 import simpleGit, { SimpleGit } from 'simple-git';
@@ -30,8 +32,7 @@ import { Event, commands, extensions } from 'vscode';
 import { GitAPIState, GitRepository, PostMessageData } from '../../models';
 import * as l10n from '@vscode/l10n';
 import { LocalizationKey } from '../../localization';
-import { DashboardCommand } from '../../dashboardWebView/DashboardCommand';
-import { DashboardMessage } from '../../dashboardWebView/DashboardMessage';
+
 
 export class GitListener {
   private static gitAPI: {
@@ -139,7 +140,7 @@ export class GitListener {
 
     const isRepo = await GitListener.isGitRepository();
     Dashboard.postWebviewMessage({
-      command: command as DashboardCommand | DashboardMessage,
+      command: command,
       payload: isRepo,
       requestId
     });

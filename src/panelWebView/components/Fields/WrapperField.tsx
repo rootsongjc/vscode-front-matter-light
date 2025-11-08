@@ -8,6 +8,12 @@ import { TagType } from '../../TagType';
 import { DataBlockField } from '../DataBlock';
 import FieldBoundary from '../ErrorBoundary/FieldBoundary';
 import { ListUnorderedIcon } from '../Icons/ListUnorderedIcon';
+
+declare global {
+  interface Window {
+    fmExternal?: any;
+  }
+}
 import { TagIcon } from '../Icons/TagIcon';
 import { JsonField } from '../JsonField';
 import { IMetadata } from '../Metadata';

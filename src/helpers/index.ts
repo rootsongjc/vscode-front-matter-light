@@ -38,3 +38,7 @@ export * from './processFmPlaceholders';
 export * from './processI18nPlaceholders';
 export * from './processPathPlaceholders';
 export * from './processTimePlaceholders';
+
+// Export types for removed functionality
+export type { SortingOption } from '../extension';
+export { SortOption, Page, I10nProvider, Dashboard, DashboardMediaListener, DashboardSettingsListener, PagesListener, DashboardCommand, DashboardMessage } from '../extension';

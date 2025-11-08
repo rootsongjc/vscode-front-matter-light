@@ -25,6 +25,8 @@ export default function useMessages() {
   const messageListener = (event: MessageEvent<EventData<any>>) => {
     const message = event.data;
 
+    console.log('PANEL: Message received:', message.command, message);
+
     messageHandler.send(GeneralCommands.toVSCode.logging.verbose, {
       message: `Message received: ${message.command}`,
       location: 'PANEL'
@@ -81,6 +83,7 @@ export default function useMessages() {
       setLoading(false);
     }, 5000);
 
+    console.log('PANEL: Sending initial messages');
     Messenger.send(CommandToCode.getData);
     Messenger.send(CommandToCode.getMode);
     Messenger.send(GeneralCommands.toVSCode.getLocalization);

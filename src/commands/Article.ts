@@ -39,7 +39,6 @@ import { DateHelper } from '../helpers/DateHelper';
 import { parseWinPath } from '../helpers/parseWinPath';
 import { ParsedFrontMatter } from '../parsers';
 import { MediaListener } from '../listeners/panel';
-import { NavigationType } from '../dashboardWebView/models';
 import { SNIPPET } from '../constants/Snippet';
 import * as l10n from '@vscode/l10n';
 import { LocalizationKey } from '../localization';
@@ -445,19 +444,19 @@ export class Article {
     const position = editor.selection.active;
     const selectionText = editor.document.getText(editor.selection);
 
-    await commands.executeCommand(COMMAND_NAME.dashboard, {
-      type: 'media',
-      data: {
-        pageBundle: !!contentType.pageBundle,
-        filePath: editor.document.uri.fsPath,
-        fieldName: basename(editor.document.uri.fsPath),
-        position,
-        selection: selectionText
-      }
-    } as DashboardData);
+    // await commands.executeCommand(COMMAND_NAME.dashboard, {
+    //   type: 'media',
+    //   data: {
+    //     pageBundle: !!contentType.pageBundle,
+    //     filePath: editor.document.uri.fsPath,
+    //     fieldName: basename(editor.document.uri.fsPath),
+    //     position,
+    //     selection: selectionText
+    //   }
+    // } as DashboardData);
 
     // Let the editor panel know you are selecting an image
-    MediaListener.getMediaSelection();
+    // MediaListener.getMediaSelection();
   }
 
   /**
@@ -521,19 +520,19 @@ export class Article {
     const contentType = article ? await ArticleHelper.getContentType(article) : undefined;
     const tileField = getTitleField();
 
-    await commands.executeCommand(COMMAND_NAME.dashboard, {
-      type: NavigationType.Snippets,
-      data: {
-        fileTitle: article?.data[tileField] || '',
-        filePath: editor.document.uri.fsPath,
-        fieldName: basename(editor.document.uri.fsPath),
-        contentType,
-        position,
-        range,
-        selection: selectionText,
-        snippetInfo
-      }
-    } as DashboardData);
+    // await commands.executeCommand(COMMAND_NAME.dashboard, {
+    //   type: NavigationType.Snippets,
+    //   data: {
+    //     fileTitle: article?.data[tileField] || '',
+    //     filePath: editor.document.uri.fsPath,
+    //     fieldName: basename(editor.document.uri.fsPath),
+    //     contentType,
+    //     position,
+    //     range,
+    //     selection: selectionText,
+    //     snippetInfo
+    //   }
+    // } as DashboardData);
   }
 
   /**

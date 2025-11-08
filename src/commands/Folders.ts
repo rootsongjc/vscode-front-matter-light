@@ -23,10 +23,9 @@ import { Template } from './Template';
 import { Notifications } from '../helpers/Notifications';
 import { Extension, Logger, Settings, processTimePlaceholders } from '../helpers';
 import { existsSync } from 'fs';
-import { Dashboard } from './Dashboard';
 import { parseWinPath } from '../helpers/parseWinPath';
 import { MediaHelpers } from '../helpers/MediaHelpers';
-import { MediaListener, PagesListener, SettingsListener } from '../listeners/dashboard';
+import { MediaListener } from '../listeners/panel';
 import { DEFAULT_FILE_TYPES } from '../constants/DefaultFileTypes';
 import { glob } from 'glob';
 import { mkdirAsync } from '../utils/mkdirAsync';
@@ -100,10 +99,10 @@ export class Folders {
       await mkdirAsync(folderPath, { recursive: true });
     }
 
-    if (Dashboard.isOpen) {
-      MediaHelpers.resetMedia();
-      MediaListener.sendMediaFiles(0, folderPath);
-    }
+    // if (Dashboard.isOpen) {
+    //   MediaHelpers.resetMedia();
+    //   MediaListener.sendMediaFiles(0, folderPath);
+    // }
   }
 
   /**
@@ -178,7 +177,7 @@ export class Folders {
 
       Notifications.info(l10n.t(LocalizationKey.commandsFoldersCreateSuccess));
 
-      SettingsListener.getSettings(true);
+      // SettingsListener.getSettings(true);
     }
   }
 
@@ -514,7 +513,7 @@ export class Folders {
     await Settings.safeUpdate(SETTING_CONTENT_PAGE_FOLDERS, folderDetails, true);
 
     // Reinitialize the folder listeners
-    PagesListener.startWatchers();
+    // PagesListener.startWatchers();
   }
 
   /**

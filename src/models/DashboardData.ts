@@ -1,10 +1,9 @@
 import { Position } from 'vscode';
-import { NavigationType } from '../dashboardWebView/models';
 import { BlockFieldData } from './BlockFieldData';
 import { ContentType } from '.';
 
 export interface DashboardData {
-  type: NavigationType;
+  type: string;
   data?: ViewData;
 }
 

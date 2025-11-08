@@ -3,6 +3,12 @@ import { useEffect, useState } from 'react';
 import { CustomPanelViewResult } from '../../../models';
 import { Collapsible } from '../Collapsible';
 
+declare global {
+  interface Window {
+    fmExternal?: any;
+  }
+}
+
 export interface ICustomViewProps {
   metadata?: any;
 }

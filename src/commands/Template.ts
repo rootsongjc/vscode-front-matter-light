@@ -13,7 +13,6 @@ import { Notifications } from '../helpers/Notifications';
 import { Project } from './Project';
 import { ContentType } from '../helpers/ContentType';
 import { ContentType as IContentType } from '../models';
-import { PagesListener } from '../listeners/dashboard';
 import { extname } from 'path';
 import { writeFileAsync, copyFileAsync } from '../utils';
 import * as l10n from '@vscode/l10n';
@@ -223,7 +222,7 @@ export class Template {
     Notifications.info(l10n.t(LocalizationKey.commandsTemplateCreateSuccess));
 
     // Trigger a refresh for the dashboard
-    PagesListener.refresh();
+    // PagesListener.refresh();
   }
 
   /**

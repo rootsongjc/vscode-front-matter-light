@@ -17,10 +17,20 @@ const config = [{
     path: path.resolve(__dirname, '../dist')
   },
   devtool: 'source-map',
+  externals: {
+    vscode: 'commonjs vscode',
+    '@vscode/l10n': 'commonjs @vscode/l10n'
+  },
   resolve: {
-    extensions: ['.ts', '.js', '.tsx', '.jsx'],
+  extensions: ['.ts', '.js', '.tsx', '.jsx'],
     fallback: {
       "path": require.resolve("path-browserify"),
+      "fs": false,
+      "child_process": false,
+      "os": false,
+      "stream": false,
+      "buffer": false,
+      "url": false,
     }
   },
   module: {
@@ -29,7 +39,10 @@ const config = [{
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         use: [{
-          loader: 'ts-loader'
+        loader: 'ts-loader',
+          options: {
+            transpileOnly: true
+          }
         }]
       },
       {
@@ -67,9 +80,10 @@ const config = [{
       fileName: "panel.manifest.json"
     }),
     new ESLintPlugin({
-      extensions: ['ts', 'tsx'],
-      exclude: ['node_modules', 'dist'],
-      emitWarning: false,
+    extensions: ['ts', 'tsx'],
+    exclude: ['node_modules', 'dist'],
+    emitWarning: false,
+      emitError: false,
     }),
     new ProvidePlugin({
       // Make a global `process` variable that points to the `process` package,

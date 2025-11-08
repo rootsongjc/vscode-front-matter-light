@@ -1,13 +1,13 @@
 import { ModeListener } from './../listeners/general/ModeListener';
-import { PagesListener } from './../listeners/dashboard';
 import {
-  ArticleHelper,
-  CustomScript,
-  Extension,
-  Logger,
-  Settings,
-  processArticlePlaceholdersFromData,
-  processTimePlaceholders
+ArticleHelper,
+CustomScript,
+Extension,
+Logger,
+Settings,
+processArticlePlaceholdersFromData,
+processTimePlaceholders,
+  PagesListener
 } from '.';
 import {
   COMMAND_NAME,

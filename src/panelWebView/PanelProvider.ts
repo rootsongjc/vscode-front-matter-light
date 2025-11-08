@@ -101,9 +101,7 @@ export class PanelProvider implements WebviewViewProvider, Disposable {
     this.updateCurrentFile();
 
     webviewView.webview.onDidReceiveMessage(async (msg) => {
-      if (!ignoreMsgCommand(msg.command)) {
-        Logger.info(`Receiving message from panel: ${msg.command}`);
-      }
+      Logger.info(`Receiving message from panel: ${msg.command}`);
 
       LocalizationListener.process(msg);
       FieldsListener.process(msg);
@@ -243,13 +241,9 @@ export class PanelProvider implements WebviewViewProvider, Disposable {
     const version = ext.getVersion();
     const isBeta = ext.isBetaVersion();
 
-    const isProd = Extension.getInstance().isProductionMode;
-    let scriptUris = [];
-    if (isProd) {
-      scriptUris = await getWebviewJsFiles('panel', webView);
-    } else {
-      scriptUris.push(`http://${localServerUrl}/${webviewFile}`);
-    }
+    // Always use production mode for file loading since we have built files
+    const scriptUris = await getWebviewJsFiles('panel', webView);
+    const isProd = true;
 
     // Get experimental setting
     const experimental = Settings.get(SETTING_EXPERIMENTAL);

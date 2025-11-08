@@ -17,7 +17,7 @@ import {
   SETTING_CONTENT_DEFAULT_FILETYPE,
   SETTING_TAXONOMY_CONTENT_TYPES
 } from '../constants';
-import { SettingsListener } from '../listeners/dashboard';
+
 import { existsAsync, writeFileAsync } from '../utils';
 import * as l10n from '@vscode/l10n';
 import { LocalizationKey } from '../localization';
@@ -99,10 +99,10 @@ categories: []
       const framework = await FrameworkDetector.get(wsFolder?.fsPath || '');
 
       if (framework) {
-        await SettingsListener.setFramework(framework.name);
+        // await SettingsListener.setFramework(framework.name);
       }
 
-      SettingsListener.getSettings(true);
+      // SettingsListener.getSettings(true);
     } catch (error: unknown) {
       const err = error as Error;
       Logger.error(`Project::init: ${err?.message || err}`);
@@ -129,7 +129,7 @@ categories: []
       return;
     }
 
-    SettingsListener.switchProject(project);
+    // SettingsListener.switchProject(project);
   }
 
   /**

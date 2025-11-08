@@ -34,11 +34,7 @@ import {
   SETTING_MEDIA_CONTENTTYPES,
   SETTING_PANEL_OPEN_ON_SUPPORTED_FILE
 } from '../constants';
-import {
-  DashboardViewType,
-  SortingOption,
-  Settings as ISettings
-} from '../dashboardWebView/models';
+
 import {
   CustomScript,
   DEFAULT_MEDIA_CONTENT_TYPE,
@@ -59,10 +55,10 @@ import { parseWinPath } from './parseWinPath';
 import { TaxonomyHelper } from './TaxonomyHelper';
 import { ContentType } from './ContentType';
 import { Logger } from './Logger';
-import { DataListener } from '../listeners/dashboard';
+// import { DataListener } from '../listeners/dashboard';
 
 export class DashboardSettings {
-  private static cachedSettings: ISettings | undefined = undefined;
+  private static cachedSettings: any | undefined = undefined;
 
   public static async get(clear = false) {
     if (!this.cachedSettings || clear) {
@@ -80,10 +76,10 @@ export class DashboardSettings {
 
       // Update states
       this.cachedSettings.dashboardState.contents.sorting = await ext.getState<
-        SortingOption | undefined
+        string | undefined
       >(ExtensionState.Dashboard.Contents.Sorting, 'workspace');
       this.cachedSettings.dashboardState.media.sorting = await ext.getState<
-        SortingOption | undefined
+        string | undefined
       >(ExtensionState.Dashboard.Media.Sorting, 'workspace');
     }
   }
@@ -111,7 +107,7 @@ export class DashboardSettings {
         openOnStart: Settings.get(SETTING_DASHBOARD_OPENONSTART),
         openPanelForSupportedFiles: Settings.get(SETTING_PANEL_OPEN_ON_SUPPORTED_FILE),
         versionInfo: ext.getVersion(),
-        pageViewType: await ext.getState<DashboardViewType | undefined>(
+        pageViewType: await ext.getState<string | undefined>(
           ExtensionState.PagesView,
           'workspace'
         ),
@@ -130,7 +126,7 @@ export class DashboardSettings {
         },
         dashboardState: {
           contents: {
-            sorting: await ext.getState<SortingOption | undefined>(
+            sorting: await ext.getState<string | undefined>(
               ExtensionState.Dashboard.Contents.Sorting,
               'workspace'
             ),
@@ -146,7 +142,7 @@ export class DashboardSettings {
             }
           },
           media: {
-            sorting: await ext.getState<SortingOption | undefined>(
+            sorting: await ext.getState<string | undefined>(
               ExtensionState.Dashboard.Media.Sorting,
               'workspace'
             ),
@@ -174,14 +170,14 @@ export class DashboardSettings {
           ]
         },
         lastUpdated: new Date().getTime()
-      } as ISettings;
+      } as any;
 
       Logger.verbose('DashboardSettings:getSettings:end');
 
       return settings;
     } catch (error) {
       Logger.error(`DashboardSettings:getSettings:error ${(error as Error).message}`);
-      return {} as ISettings;
+      return {} as any;
     }
   }
 
@@ -222,7 +218,7 @@ export class DashboardSettings {
 
         const dataFiles = [...dataJsonFiles, ...dataYmlFiles, ...dataYamlFiles];
         for (const dataFile of dataFiles) {
-          clonedFiles.push(DataListener.createDataFileObject(dataFile.fsPath, folder));
+          // clonedFiles.push(DataListener.createDataFileObject(dataFile.fsPath, folder));
         }
       }
     }

@@ -1,7 +1,6 @@
 import { authentication, commands, ExtensionContext } from 'vscode';
 import { COMMAND_NAME, CONTEXT, WEBSITE_LINKS } from '../constants';
 import { Extension, Logger } from '../helpers';
-import { Dashboard } from './Dashboard';
 import { SettingsListener } from '../listeners/panel';
 import { PanelProvider } from '../panelWebView/PanelProvider';
 
@@ -44,10 +43,6 @@ export class Backers {
             const PanelView = PanelProvider.getInstance();
             if (PanelView.visible) {
               SettingsListener.getSettings();
-            }
-
-            if (Dashboard.isOpen) {
-              Dashboard.reload();
             }
           }
         } else {

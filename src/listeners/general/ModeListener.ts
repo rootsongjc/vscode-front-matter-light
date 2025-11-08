@@ -1,10 +1,9 @@
 import { ModeSwitch } from './../../services/ModeSwitch';
 import { CONTEXT, FEATURE_FLAG, GeneralCommands, SETTING_GLOBAL_MODES } from '../../constants';
-import { DashboardMessage } from '../../dashboardWebView/DashboardMessage';
 import { Mode, PostMessageData } from '../../models';
 import { CommandToCode } from '../../panelWebView/CommandToCode';
 import { BaseListener } from './BaseListener';
-import { Settings } from '../../helpers';
+import { Settings, DashboardMessage } from '../../helpers';
 import { commands } from 'vscode';
 
 export class ModeListener extends BaseListener {

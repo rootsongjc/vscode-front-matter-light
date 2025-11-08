@@ -1,7 +1,6 @@
 import { GeneralCommands } from './../../constants/GeneralCommands';
-import { Dashboard } from '../../commands/Dashboard';
 import { PanelProvider } from '../../panelWebView/PanelProvider';
-import { ArticleHelper, Extension } from '../../helpers';
+import { ArticleHelper, Extension, Dashboard } from '../../helpers';
 import { Logger } from '../../helpers/Logger';
 import { commands, Uri, window } from 'vscode';
 import { PostMessageData } from '../../models';

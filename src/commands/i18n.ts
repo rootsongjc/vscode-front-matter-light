@@ -9,14 +9,15 @@ import {
   workspace
 } from 'vscode';
 import {
-  ArticleHelper,
-  ContentType,
-  Extension,
-  FrameworkDetector,
-  Notifications,
-  Settings,
-  openFileInEditor,
-  parseWinPath
+ArticleHelper,
+ContentType,
+Extension,
+FrameworkDetector,
+Notifications,
+Settings,
+openFileInEditor,
+parseWinPath,
+  PagesListener
 } from '../helpers';
 import { COMMAND_NAME, SETTING_CONTENT_I18N } from '../constants';
 import { ContentFolder, Field, I18nConfig, ContentType as IContentType } from '../models';
@@ -24,7 +25,6 @@ import { join, parse } from 'path';
 import { existsAsync, getDescriptionField, getTitleField } from '../utils';
 import { Folders } from '.';
 import { ParsedFrontMatter } from '../parsers';
-import { PagesListener } from '../listeners/dashboard';
 import { LocalizationKey, localize } from '../localization';
 import { Translations } from '../services/Translations';
 

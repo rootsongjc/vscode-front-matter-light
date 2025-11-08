@@ -2,7 +2,7 @@ import { Combobox, Transition } from '@headlessui/react';
 import * as React from 'react';
 import { BaseFieldProps } from '../../../models';
 import { Fragment, useCallback, useEffect, useMemo } from 'react';
-import { Page } from '../../../dashboardWebView/models';
+import { Page } from '../../../helpers';
 import { messageHandler } from '@estruyf/vscode/dist/client/webview';
 import { CommandToCode } from '../../CommandToCode';
 import { ChevronDownIcon, DocumentPlusIcon } from '@heroicons/react/24/outline';
@@ -61,10 +61,10 @@ export const ContentTypeRelationshipField: React.FunctionComponent<
      */
     const getValue = (value: Page, type = 'path') => {
       if (type === 'path') {
-        return value.fmRelFilePath || value.fmFilePath;
+        return (value as any).fmRelFilePath || (value as any).fmFilePath;
       }
 
-      return `${value[type]}`;
+      return `${(value as any)[type]}`;
     };
 
     /**
@@ -75,7 +75,7 @@ export const ContentTypeRelationshipField: React.FunctionComponent<
         const choice = pages.find((p: Page) => getValue(p, contentTypeValue) === value);
 
         if (choice) {
-          return choice.title;
+          return choice.title || '';
         }
         return '';
       },
@@ -138,7 +138,7 @@ export const ContentTypeRelationshipField: React.FunctionComponent<
         }
 
         if (toShow && filter) {
-          return page.title.toLowerCase().includes(filter);
+          return (page.title || '').toLowerCase().includes(filter);
         }
 
         return toShow;
@@ -168,7 +168,7 @@ export const ContentTypeRelationshipField: React.FunctionComponent<
           })
           .then((pages: Page[]) => {
             setPages(pages || []);
-            setChoices((pages || []).map((page) => page.title));
+            setChoices((pages || []).map((page) => page.title || ''));
           })
           .finally(() => {
             setLoading(false);
@@ -219,7 +219,7 @@ export const ContentTypeRelationshipField: React.FunctionComponent<
                   >
                     {availableChoices.map((choice) => (
                       <Combobox.Option
-                        key={choice.fmFilePath}
+                        key={(choice as any).fmFilePath}
                         value={getValue(choice, contentTypeValue)}
                         className={({ active }) =>
                           `cursor-pointer list-none px-[var(--input-padding-horizontal)] py-[var(--input-padding-vertical)] hover:bg-[var(--vscode-button-hoverBackground)] hover:text-[var(--vscode-button-foreground)] ${active
@@ -228,8 +228,8 @@ export const ContentTypeRelationshipField: React.FunctionComponent<
                           }`
                         }
                       >
-                        {choice.title}
-                        <div className="mt-0.5 text-xs opacity-60">{choice.slug}</div>
+                        {choice.title ?? ''}
+                        <div className="mt-0.5 text-xs opacity-60">{choice.slug ?? ''}</div>
                       </Combobox.Option>
                     ))}
 

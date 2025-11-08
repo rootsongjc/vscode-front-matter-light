@@ -1,7 +1,7 @@
 {
-  "name": "vscode-front-matter-beta",
-  "displayName": "Front Matter CMS",
-  "description": "Front Matter is a CMS that runs within Visual Studio Code. It gives you the power and control of a full-blown CMS while also providing you the flexibility and speed of the static site generator of your choice like: Hugo, Jekyll, Docusaurus, NextJs, Gatsby, and many more...",
+  "name": "vscode-front-matter-light",
+  "displayName": "Front Matter Light",
+  "description": "A lightweight Front Matter editor for VS Code that allows you to edit YAML front matter in markdown files through a sidebar panel and configure content types via settings.",
   "icon": "assets/frontmatter-teal-128x128.png",
   "version": "10.9.0",
   "preview": false,
@@ -73,16 +73,6 @@
     },
     "keybindings": [
       {
-        "command": "frontMatter.dashboard",
-        "key": "alt+d"
-      },
-      {
-        "command": "workbench.action.webview.reloadWebviewAction",
-        "key": "ctrl+r",
-        "mac": "cmd+r",
-        "when": "activeWebviewPanelId == frontMatterDashboard"
-      },
-      {
         "command": "frontMatter.insertMedia",
         "key": "ctrl+shift+i",
         "mac": "cmd+shift+i",
@@ -95,25 +85,6 @@
         "when": "editorTextFocus"
       }
     ],
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "frontmatter-explorer",
-          "title": "FM",
-          "icon": "$(fm-logo)"
-        }
-      ]
-    },
-    "views": {
-      "frontmatter-explorer": [
-        {
-          "id": "frontMatter.explorer",
-          "name": "Front Matter",
-          "icon": "$(fm-logo)",
-          "type": "webview"
-        }
-      ]
-    },
     "configuration": {
       "title": "%settings.configuration.title%",
       "type": "object",
@@ -723,56 +694,6 @@
           },
           "scope": "Custom scripts"
         },
-        "frontMatter.dashboard.content.pagination": {
-          "type": [
-            "boolean",
-            "number"
-          ],
-          "default": true,
-          "markdownDescription": "%setting.frontMatter.dashboard.content.pagination.markdownDescription%",
-          "scope": "Dashboard"
-        },
-        "frontMatter.dashboard.content.cardTags": {
-          "type": "string",
-          "default": "tags",
-          "markdownDescription": "%setting.frontMatter.dashboard.content.cardTags.markdownDescription%",
-          "scope": "Dashboard"
-        },
-        "frontMatter.dashboard.content.card.fields.state": {
-          "type": "boolean",
-          "default": true,
-          "markdownDescription": "%setting.frontMatter.dashboard.content.card.fields.state.markdownDescription%"
-        },
-        "frontMatter.dashboard.content.card.fields.date": {
-          "type": "boolean",
-          "default": true,
-          "markdownDescription": "%setting.frontMatter.dashboard.content.card.fields.date.markdownDescription%"
-        },
-        "frontMatter.dashboard.content.card.fields.description": {
-          "type": [
-            "null",
-            "string"
-          ],
-          "default": "",
-          "markdownDescription": "%setting.frontMatter.dashboard.content.card.fields.description.markdownDescription%"
-        },
-        "frontMatter.dashboard.content.card.fields.title": {
-          "type": [
-            "null",
-            "string"
-          ],
-          "default": "",
-          "markdownDescription": "%setting.frontMatter.dashboard.content.card.fields.title.markdownDescription%"
-        },
-        "frontMatter.dashboard.openOnStart": {
-          "type": [
-            "boolean",
-            "null"
-          ],
-          "default": null,
-          "markdownDescription": "%setting.frontMatter.dashboard.openOnStart.markdownDescription%",
-          "scope": "Dashboard"
-        },
         "frontMatter.data.files": {
           "type": "array",
           "default": [],
@@ -1066,10 +987,14 @@
                     "panel.gitActions",
                     "panel.recentlyModified",
                     "panel.otherActions",
-                    "dashboard.snippets.view",
-                    "dashboard.snippets.manage",
-                    "dashboard.data.view",
-                    "dashboard.taxonomy.view"
+                    "panel.globalSettings",
+                    "panel.seo",
+                    "panel.actions",
+                    "panel.metadata",
+                    "panel.contentType",
+                    "panel.gitActions",
+                    "panel.recentlyModified",
+                    "panel.otherActions"
                   ]
                 }
               }
@@ -2188,12 +2113,6 @@
         }
       },
       {
-        "command": "frontMatter.dashboard.close",
-        "title": "%command.frontMatter.dashboard.close%",
-        "category": "Front Matter",
-        "icon": "$(fm-logo)"
-      },
-      {
         "command": "frontMatter.markup.code",
         "title": "%command.frontMatter.markup.code%",
         "category": "Front Matter",
@@ -2333,36 +2252,6 @@
         }
       },
       {
-        "command": "frontMatter.dashboard",
-        "title": "%command.frontMatter.dashboard%",
-        "category": "Front Matter",
-        "icon": "$(fm-logo)"
-      },
-      {
-        "command": "frontMatter.dashboard.data",
-        "title": "%command.frontMatter.dashboard.data%",
-        "category": "Front Matter",
-        "icon": "$(fm-logo)"
-      },
-      {
-        "command": "frontMatter.dashboard.media",
-        "title": "%command.frontMatter.dashboard.media%",
-        "category": "Front Matter",
-        "icon": "$(fm-logo)"
-      },
-      {
-        "command": "frontMatter.dashboard.snippets",
-        "title": "%command.frontMatter.dashboard.snippets%",
-        "category": "Front Matter",
-        "icon": "$(fm-logo)"
-      },
-      {
-        "command": "frontMatter.dashboard.taxonomy",
-        "title": "%command.frontMatter.dashboard.taxonomy%",
-        "category": "Front Matter",
-        "icon": "$(fm-logo)"
-      },
-      {
         "command": "frontMatter.markup.orderedlist",
         "title": "%command.frontMatter.markup.orderedlist%",
         "category": "Front Matter",
@@ -2474,11 +2363,29 @@
       }
     ],
     "submenus": [
-      {
-        "id": "frontmatter.submenu",
-        "label": "Front Matter"
-      }
+    {
+    "id": "frontmatter.submenu",
+    "label": "Front Matter"
+    }
     ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "frontMatter",
+          "title": "Front Matter",
+          "icon": "$(fm-logo)"
+        }
+      ]
+    },
+    "views": {
+      "frontMatter": [
+        {
+          "id": "frontMatter.explorer",
+          "name": "Front Matter",
+          "type": "webview"
+        }
+      ]
+    },
     "menus": {
       "webview/context": [
         {
@@ -2510,7 +2417,7 @@
         {
           "command": "frontMatter.insertSnippet",
           "group": "navigation@-129",
-          "when": "frontMatter:file:isValid == true && frontMatter:dashboard:snippets:enabled && activeEditor == 'workbench.editors.files.textFileEditor'"
+          "when": "frontMatter:file:isValid == true && activeEditor == 'workbench.editors.files.textFileEditor'"
         },
         {
           "command": "frontMatter.insertMedia",
@@ -2558,16 +2465,6 @@
           "when": "frontMatter:file:isValid == true && frontMatter:markdown:wysiwyg && activeEditor == 'workbench.editors.files.textFileEditor'"
         },
         {
-          "command": "frontMatter.dashboard",
-          "group": "navigation@-98",
-          "when": "frontMatter:enabled == true && frontMatter:dashboard:open == false"
-        },
-        {
-          "command": "frontMatter.dashboard.close",
-          "group": "navigation@-98",
-          "when": "frontMatter:enabled == true && frontMatter:dashboard:open == true"
-        },
-        {
           "command": "frontMatter.chatbot",
           "group": "navigation@-97",
           "when": "resourceFilename == 'frontmatter.json'"
@@ -2604,14 +2501,6 @@
         {
           "command": "frontMatter.project.switch",
           "when": "frontMatter:project:switch:enabled"
-        },
-        {
-          "command": "frontMatter.dashboard.data",
-          "when": "frontMatter:dashboard:data:enabled"
-        },
-        {
-          "command": "frontMatter.dashboard.snippets",
-          "when": "frontMatter:dashboard:snippets:enabled"
         },
         {
           "command": "frontMatter.git.sync",
@@ -2651,10 +2540,6 @@
         },
         {
           "command": "frontMatter.createFromTemplate",
-          "when": "false"
-        },
-        {
-          "command": "frontMatter.dashboard.close",
           "when": "false"
         },
         {
@@ -2735,7 +2620,7 @@
         },
         {
           "command": "frontMatter.insertSnippet",
-          "when": "frontMatter:file:isValid == true && frontMatter:dashboard:snippets:enabled"
+          "when": "frontMatter:file:isValid == true"
         },
         {
           "command": "frontMatter.insertMedia",
@@ -2804,11 +2689,6 @@
           "command": "frontMatter.collapseSections",
           "group": "navigation@4",
           "when": "view == frontMatter.explorer"
-        },
-        {
-          "command": "frontMatter.dashboard",
-          "group": "navigation@5",
-          "when": "view == frontMatter.explorer || view == explorer"
         }
       ]
     },
@@ -2843,7 +2723,7 @@
           {
             "id": "frontmatter.welcome.init",
             "title": "Get started",
-            "description": "Initial steps to get started.\n[Open dashboard](command:frontMatter.dashboard)",
+            "description": "Initial steps to get started.",
             "media": {
               "markdown": "assets/walkthrough/get-started.md"
             },
@@ -2878,26 +2758,22 @@
     ]
   },
   "scripts": {
-    "dev:ext": "npm run clean && npm run localization:generate && npm-run-all --parallel watch:*",
-    "vscode:prepublish": "npm run clean && npm run localization:generate && npm-run-all --parallel prod:*",
-    "build:ext": "npm run clean && npm-run-all --parallel dev:build:*",
-    "watch:ext": "webpack --mode development --watch --config ./webpack/extension.config.js",
-    "watch:dashboard": "webpack serve --mode development --config ./webpack/dashboard.config.js",
-    "watch:panel": "webpack serve --mode development --config ./webpack/panel.config.js",
-    "dev:build:ext": "webpack --mode development --config ./webpack/extension.config.js",
-    "dev:build:dashboard": "webpack --mode development --config ./webpack/dashboard.config.js",
-    "dev:build:panel": "webpack --mode development --config ./webpack/panel.config.js",
-    "prod:ext": "webpack --mode production --config ./webpack/extension.config.js",
-    "prod:dashboard": "webpack --mode production --config ./webpack/dashboard.config.js",
-    "prod:panel": "webpack --mode production --config ./webpack/panel.config.js",
-    "test-compile": "tsc -p ./",
-    "clean": "rimraf dist",
-    "lint": "eslint --max-warnings=0 ./src/{commands,components}",
-    "prettier": "prettier --write ./src",
-    "localization:watch": "node ./scripts/watch-localization.js",
-    "localization:generate": "node scripts/generate-localization-enum.js",
-    "localization:sync": "node scripts/sync-localization.js",
-    "localization:find": "node scripts/find-localization.js"
+  "dev:ext": "npm run clean && npm run localization:generate && npm-run-all --parallel watch:*",
+  "build:ext": "npm run clean && npm-run-all --parallel dev:build:*",
+  "watch:ext": "webpack --mode development --watch --config ./webpack/extension.config.js",
+  "watch:panel": "webpack serve --mode development --config ./webpack/panel.config.js",
+  "dev:build:ext": "webpack --mode development --config ./webpack/extension.config.js",
+  "dev:build:panel": "webpack --mode development --config ./webpack/panel.config.js",
+  "prod:ext": "webpack --mode production --config ./webpack/extension.config.js",
+  "prod:panel": "webpack --mode production --config ./webpack/panel.config.js",
+  "test-compile": "tsc -p ./",
+  "clean": "rimraf dist",
+  "lint": "eslint --max-warnings=0 ./src/{commands,components}",
+  "prettier": "prettier --write ./src",
+  "localization:watch": "node ./scripts/watch-localization.js",
+  "localization:generate": "node scripts/generate-localization-enum.js",
+  "localization:sync": "node scripts/sync-localization.js",
+  "localization:find": "node scripts/find-localization.js"
   },
   "devDependencies": {
     "@actions/core": "^1.10.0",

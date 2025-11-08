@@ -1,8 +1,7 @@
 import { PanelProvider } from './../../panelWebView/PanelProvider';
 import { commands, window } from 'vscode';
-import { Dashboard } from '../../commands/Dashboard';
 import { COMMAND_NAME } from '../../constants';
-import { ArticleHelper, ImageHelper } from '../../helpers';
+import { ArticleHelper, ImageHelper, Dashboard } from '../../helpers';
 import { DashboardData, PostMessageData } from '../../models';
 import { Command } from '../../panelWebView/Command';
 import { CommandToCode } from '../../panelWebView/CommandToCode';

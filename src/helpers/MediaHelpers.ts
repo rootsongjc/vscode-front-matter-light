@@ -1,15 +1,20 @@
 import { STATIC_FOLDER_PLACEHOLDER } from './../constants/StaticFolderPlaceholder';
 import {
-  decodeBase64,
-  Extension,
-  FrameworkDetector,
-  MediaLibrary,
-  Notifications,
-  parseWinPath,
-  Settings,
-  Sorting
+decodeBase64,
+Extension,
+FrameworkDetector,
+MediaLibrary,
+Notifications,
+parseWinPath,
+Settings,
+Sorting,
+  SortingOption,
+  SortOption,
+  Dashboard,
+  DashboardMediaListener,
+  Page,
+  I10nProvider
 } from '.';
-import { Dashboard } from '../commands/Dashboard';
 import { Folders } from '../commands/Folders';
 import {
   DEFAULT_CONTENT_TYPE,
@@ -17,16 +22,13 @@ import {
   HOME_PAGE_NAVIGATION_ID,
   SETTING_MEDIA_SUPPORTED_MIMETYPES
 } from '../constants';
-import { SortingOption } from '../dashboardWebView/models';
 import { BlockFieldData, MediaInfo, MediaPaths, SortOrder, SortType } from '../models';
 import { basename, join, parse, dirname, relative } from 'path';
 import { statSync } from 'fs';
 import { Uri, workspace, window, Position } from 'vscode';
 import imageSize from 'image-size';
 import { EditorHelper } from '@estruyf/vscode';
-import { SortOption } from '../dashboardWebView/constants/SortOption';
 import { DataListener, MediaListener } from '../listeners/panel';
-import { MediaListener as DashboardMediaListener } from '../listeners/dashboard';
 import { ArticleHelper } from './ArticleHelper';
 import { lookup } from 'mime-types';
 import { existsAsync, readdirAsync, unlinkAsync, writeFileAsync } from '../utils';

@@ -1,20 +1,19 @@
-import { SortOption } from '../dashboardWebView/constants/SortOption';
-import { Page, SortingOption } from '../dashboardWebView/models';
 import { Sorting } from '../helpers/Sorting';
 import { SortOrder, SortType } from '../models';
+import { Page } from '../helpers';
 
-export const sortPages = (pages: Page[], sorting: SortingOption | null) => {
-  if (sorting && sorting.id === SortOption.FileNameAsc) {
+export const sortPages = (pages: Page[], sorting: any | null) => {
+  if (sorting && sorting.id === 'fileNameAsc') {
     pages = pages.sort(Sorting.alphabetically('fmFileName'));
-  } else if (sorting && sorting.id === SortOption.FileNameDesc) {
+  } else if (sorting && sorting.id === 'fileNameDesc') {
     pages = pages.sort(Sorting.alphabetically('fmFileName')).reverse();
-  } else if (sorting && sorting.id === SortOption.PublishedAsc) {
+  } else if (sorting && sorting.id === 'publishedAsc') {
     pages = pages.sort(Sorting.numerically('fmPublished'));
-  } else if (sorting && sorting.id === SortOption.LastModifiedAsc) {
+  } else if (sorting && sorting.id === 'lastModifiedAsc') {
     pages = pages.sort(Sorting.numerically('fmModified'));
-  } else if (sorting && sorting.id === SortOption.PublishedDesc) {
+  } else if (sorting && sorting.id === 'publishedDesc') {
     pages = pages.sort(Sorting.numerically('fmPublished')).reverse();
-  } else if (sorting && sorting.id === SortOption.LastModifiedDesc) {
+  } else if (sorting && sorting.id === 'lastModifiedDesc') {
     pages = pages.sort(Sorting.numerically('fmModified')).reverse();
   } else if (sorting && sorting.id && sorting.name) {
     const { order, name, type } = sorting;

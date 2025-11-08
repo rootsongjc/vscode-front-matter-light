@@ -60,8 +60,11 @@ export class DataListener extends BaseListener {
   public static process(msg: PostMessageData) {
     super.process(msg);
 
+    console.log('EXTENSION: DataListener received command:', msg.command);
+
     switch (msg.command) {
       case CommandToCode.getData:
+        console.log('EXTENSION: Processing getData command');
         this.getFoldersAndFiles();
         this.getFileData();
         break;
@@ -245,9 +248,11 @@ export class DataListener extends BaseListener {
    * Retrieve the information about the registered folders and its files
    */
   public static async getFoldersAndFiles(file?: Uri) {
+    console.log('EXTENSION: getFoldersAndFiles called, file:', file);
     Logger.verbose('DataListener:getFoldersAndFiles:start');
     const mode = Settings.get<string | null>(SETTING_GLOBAL_ACTIVE_MODE);
     const modes = Settings.get<Mode[]>(SETTING_GLOBAL_MODES);
+    console.log('EXTENSION: mode:', mode, 'modes:', modes);
 
     if (mode && modes && modes.length > 0) {
       const crntMode = modes.find((m) => m.id === mode);
@@ -696,19 +701,29 @@ export class DataListener extends BaseListener {
    * Retrieve the file its front matter
    */
   public static async getFileData() {
+    console.log('EXTENSION: getFileData called');
     const editor = window.activeTextEditor;
+    console.log('EXTENSION: active editor:', editor);
     if (!editor) {
+      console.log('EXTENSION: No active editor');
       return '';
     }
 
     // Check if the file is a valid article
-    if (!ArticleHelper.isSupportedFile()) {
+    const isSupported = ArticleHelper.isSupportedFile();
+    console.log('EXTENSION: isSupportedFile:', isSupported);
+    if (!isSupported) {
+      console.log('EXTENSION: File not supported');
       return;
     }
 
     const article = ArticleHelper.getFrontMatter(editor);
+    console.log('EXTENSION: article data:', article?.data);
     if (article?.data) {
+      console.log('EXTENSION: Pushing metadata');
       this.pushMetadata(article!.data);
+    } else {
+      console.log('EXTENSION: No article data to push');
     }
   }
 

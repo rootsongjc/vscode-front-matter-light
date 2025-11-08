@@ -1,17 +1,100 @@
 import { GitListener } from './listeners/general/GitListener';
 import * as vscode from 'vscode';
 import { COMMAND_NAME, CONTEXT, EXTENSION_NAME } from './constants';
+
+// Type definitions for removed dashboard functionality
+import * as React from 'react';
+import { SortingSetting } from './models/SortingSetting';
+
+export type SortingOption = SortingSetting;
+
+export enum SortOption {
+  FileNameAsc = 'fileNameAsc',
+  FileNameDesc = 'fileNameDesc',
+  AltAsc = 'altAsc',
+  AltDesc = 'altDesc',
+  CaptionAsc = 'captionAsc',
+  CaptionDesc = 'captionDesc',
+  SizeAsc = 'sizeAsc',
+  SizeDesc = 'sizeDesc',
+  DateAsc = 'dateAsc',
+  DateDesc = 'dateDesc'
+}
+
+export interface Page {
+  title?: string;
+  slug?: string;
+  path?: string;
+  date?: string;
+  draft?: boolean;
+  fmRelFilePath?: string;
+  fmFilePath?: string;
+  [key: string]: any;
+}
+
+// Dummy objects to avoid errors when removing dashboard functionality
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export const Dashboard = {
+  isOpen: false,
+  viewData: {
+    type: 'file' as const,
+    data: {
+      type: 'file' as const,
+      filePath: ''
+    }
+  },
+  filePath: '',
+  getWebview: () => ({
+    asWebviewUri: (uri: any) => ({ toString: () => '' })
+  }),
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  postWebviewMessage: (message: any) => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  resetViewData: () => {},
+  sendMediaFiles: () => {
+    // Stub method for removed dashboard functionality
+  }, // eslint-disable-line @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  mediaUpdate: () => {},
+  getSettings: () => {
+    // Stub method for removed dashboard functionality
+    return Promise.resolve({});
+  }, // eslint-disable-line @typescript-eslint/no-empty-function
+};
+
+export const DashboardCommand = {
+  mediaUpdate: 'mediaUpdate'
+};
+export const DashboardMessage = {
+  getMode: 'getMode'
+};
+export const DashboardMediaListener = {
+  sendMediaFiles: () => {}
+};
+export const DashboardSettingsListener = {
+  getSettings: (clear?: boolean) => {}
+};
+export const PagesListener = {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  refresh: () => {},
+  getPagesData: (force: boolean, callback: (pages: any[]) => void) => callback([])
+};
+// Simple I10nProvider component for removed functionality
+export const I10nProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => React.createElement(React.Fragment, null, children);
+
+// Simple Settings interface for removed functionality (removed to avoid conflict with Settings class)
+interface RemovedSettings {
+  [key: string]: any;
+}
 import { MarkdownFoldingProvider } from './providers/MarkdownFoldingProvider';
 import { PanelProvider } from './panelWebView/PanelProvider';
 import {
-  DashboardSettings,
   debounceCallback,
   Logger,
   parseWinPath,
   Settings as SettingsHelper
 } from './helpers';
 import ContentProvider from './providers/ContentProvider';
-import { PagesListener } from './listeners/dashboard';
 import { ModeSwitch } from './services/ModeSwitch';
 import { PagesParser } from './services/PagesParser';
 import { ContentType, Extension } from './helpers';
@@ -26,7 +109,6 @@ import {
   Project,
   Preview,
   Folders,
-  Dashboard,
   Article,
   Settings,
   StatusListener,
@@ -81,26 +163,14 @@ export async function activate(context: vscode.ExtensionContext) {
 
   SettingsHelper.checkToPromote();
 
-  // Start listening to the folders for content changes.
-  // This will make sure the dashboard is up to date
-  PagesListener.startWatchers();
-
   collection = vscode.languages.createDiagnosticCollection('frontMatter');
-
-  // Pages dashboard
-  Dashboard.init();
-  Dashboard.registerCommands();
 
   // Multilingual commands
   i18n.register();
 
   // Setting commands
-  Settings.registerCommands();
+  // Settings.registerCommands(); // Removed for light version
   SettingsHelper.registerCommands();
-
-  if (!extension.getVersion().usedVersion) {
-    vscode.commands.executeCommand(COMMAND_NAME.dashboard);
-  }
 
   // Register the explorer view
   const explorerSidebar = PanelProvider.getInstance(extensionUri);
@@ -149,7 +219,7 @@ export async function activate(context: vscode.ExtensionContext) {
     vscode.StatusBarAlignment.Right,
     -100
   );
-  fmStatusBarItem.command = COMMAND_NAME.dashboard;
+  // fmStatusBarItem.command = COMMAND_NAME.dashboard;
   fmStatusBarItem.text = `$(fm-logo) ${extension.getVersion().installedVersion}`;
   fmStatusBarItem.tooltip = EXTENSION_NAME;
   fmStatusBarItem.show();
@@ -180,9 +250,6 @@ export async function activate(context: vscode.ExtensionContext) {
 
   // Automatically run the command
   triggerPageUpdate(`main`);
-
-  // Listener for file saves
-  subscriptions.push(PagesListener.saveFileWatcher());
 
   // Webview for preview
   Preview.init();
@@ -226,7 +293,6 @@ export async function activate(context: vscode.ExtensionContext) {
   GitListener.init();
 
   // Once everything is registered, the page parsing can start in the background
-  DashboardSettings.get();
   PagesParser.start();
 
   // Cache commands

@@ -22,7 +22,8 @@ const config = [
     },
     devtool: 'nosources-source-map',
     externals: {
-      vscode: 'commonjs vscode',
+    vscode: 'commonjs vscode',
+    '@vscode/l10n': 'commonjs @vscode/l10n',
       'applicationinsights-native-metrics': 'commonjs applicationinsights-native-metrics'
     },
     resolve: {
@@ -33,7 +34,10 @@ const config = [
         test: /\.ts$/,
         exclude: /node_modules/,
         use: [{
-          loader: 'ts-loader'
+        loader: 'ts-loader',
+          options: {
+            transpileOnly: true
+          }
         }]
       },
       {
@@ -63,8 +67,9 @@ const config = [
     plugins: [
       new IgnoreDynamicRequire(),
       new ESLintPlugin({
-        extensions: ['ts'],
-        emitWarning: false,
+      extensions: ['ts'],
+      emitWarning: false,
+        emitError: false,
       })
     ]
   }

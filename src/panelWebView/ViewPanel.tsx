@@ -77,7 +77,7 @@ export const ViewPanel: React.FunctionComponent<IViewPanelProps> = () => {
   }, [mediaSelecting]);
 
   useEffect(() => {
-    if (window.fmExternal && window.fmExternal.isDevelopment) {
+    if ((window as any).fmExternal && (window as any).fmExternal.isDevelopment) {
       setIsDevMode(true);
     }
   }, []);

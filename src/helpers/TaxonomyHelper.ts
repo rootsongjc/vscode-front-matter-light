@@ -16,15 +16,14 @@ import { Settings } from './SettingsHelper';
 import { Notifications } from './Notifications';
 import { ArticleHelper } from './ArticleHelper';
 import { ContentType } from './ContentType';
+import { DashboardSettingsListener, Page } from './index';
 import { readFileAsync, writeFileAsync } from '../utils';
 import { Config, JsonDB } from 'node-json-db';
 import { Folders } from '../commands';
 import { join } from 'path';
 import { SettingsListener as PanelSettingsListener } from '../listeners/panel';
-import { SettingsListener as DashboardSettingsListener } from '../listeners/dashboard';
 import * as l10n from '@vscode/l10n';
 import { LocalizationKey } from '../localization';
-import { Page } from '../dashboardWebView/models';
 import { Logger } from './Logger';
 
 export class TaxonomyHelper {

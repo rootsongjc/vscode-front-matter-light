@@ -3,7 +3,6 @@ export * from './Backers';
 export * from './Cache';
 export * from './Chatbot';
 export * from './Content';
-export * from './Dashboard';
 export * from './Diagnostics';
 export * from './Folders';
 export * from './Preview';

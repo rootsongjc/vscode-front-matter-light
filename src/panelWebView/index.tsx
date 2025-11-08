@@ -3,9 +3,9 @@ import * as Sentry from '@sentry/react';
 import { render } from 'react-dom';
 import { ViewPanel } from './ViewPanel';
 import { RecoilRoot } from 'recoil';
-import { I10nProvider } from '../dashboardWebView/providers/I10nProvider';
 import { SentryInit } from '../utils/sentryInit';
-import { updateCssVariables } from '../dashboardWebView/utils/updateCssVariables';
+import { updateCssVariables } from '../utils/updateCssVariables';
+import { I10nProvider } from '../helpers';
 import 'vscrui/dist/codicon.css';
 
 import './styles.css';
